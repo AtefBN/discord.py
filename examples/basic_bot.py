@@ -1,12 +1,14 @@
 import discord
 from discord.ext import commands
 import random
+import requests
+from lxml.etree import fromstring
 
 description = '''An example bot to showcase the discord.ext.commands extension
 module.
 
 There are a number of utility commands being showcased here.'''
-bot = commands.Bot(command_prefix='?', description=description)
+bot = commands.Bot(command_prefix='!', description=description)
 
 @bot.event
 async def on_ready():
@@ -62,4 +64,21 @@ async def _bot():
     """Is the bot cool?"""
     await bot.say('Yes, the bot is cool.')
 
-bot.run('token')
+
+@bot.command()
+async def servers():
+    """Adds two numbers together."""
+    r = requests.get('http://www.serverleague.com/')
+    print(r.text)
+    await bot.say(r.text)
+
+
+
+@bot.command()
+async def Hello():
+    """Adds two numbers together."""
+    await bot.say('HELLO MOTHERFUCKERS cimpHi')
+
+
+
+bot.run('MTkzNTQ1MDc3ODUzOTEzMDg5.CkY8Zg.51JE7f9vFNK_s_HsJATxOT8nJK8')
